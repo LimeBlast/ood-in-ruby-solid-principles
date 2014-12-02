@@ -25,17 +25,17 @@ describe Hero do
   end
 
   describe 'attack action' do
+    let(:monster) { double('monster', toughness: 2) }
+
     it 'succeeds' do
       allow(dicepool).to receive(:skill_check).and_return(3)
-      hero    = Hero.new dicepool: dicepool
-      monster = double('monster', toughness: 2)
+      hero = Hero.new dicepool: dicepool
 
       expect(hero.attack(monster)).to be true
     end
     it 'fails' do
       allow(dicepool).to receive(:skill_check).and_return(1)
-      hero    = Hero.new dicepool: dicepool
-      monster = double('monster', toughness: 2)
+      hero = Hero.new dicepool: dicepool
 
       expect(hero.attack(monster)).to be false
     end
