@@ -17,10 +17,12 @@ describe Hero do
 
   it 'can be initialized with custom strength' do
     hero = Hero.new strength: 5, dicepool: dicepool
+
     expect(hero.strength).to eq 5
   end
   it 'can be initialized with custom health' do
     hero = Hero.new health: 8, dicepool: dicepool
+
     expect(hero.health).to eq 8
   end
 
@@ -28,13 +30,13 @@ describe Hero do
     let(:monster) { double('monster', toughness: 2) }
 
     it 'succeeds' do
-      allow(dicepool).to receive(:skill_check).and_return(3)
+      allow(dicepool).to receive(:skill_check).and_return(true)
       hero = Hero.new dicepool: dicepool
 
       expect(hero.attack(monster)).to be true
     end
     it 'fails' do
-      allow(dicepool).to receive(:skill_check).and_return(1)
+      allow(dicepool).to receive(:skill_check).and_return(false)
       hero = Hero.new dicepool: dicepool
 
       expect(hero.attack(monster)).to be false
