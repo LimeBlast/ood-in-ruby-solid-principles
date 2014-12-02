@@ -18,6 +18,7 @@ describe FleeAction do
     context 'success' do
       it 'sends flee message to the owner' do
         allow(dicepool).to receive(:skill_check).and_return(true)
+
         expect(hero).to receive(:flee)
 
         action.activate(monster)
@@ -26,6 +27,7 @@ describe FleeAction do
     context 'failure' do
       it 'deals damage to the owner' do
         allow(dicepool).to receive(:skill_check).and_return(false)
+
         expect(hero).to receive(:damage).with(monster.damage)
 
         action.activate(monster)

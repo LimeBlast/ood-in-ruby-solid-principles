@@ -22,18 +22,21 @@ describe Hero do
   it 'can be damaged' do
     hero.damage(3)
     hero.damage(2)
+
     expect(hero.health).to eq 5
   end
 
   it 'gains gold' do
     hero.gain_gold(10)
     hero.gain_gold(5)
+
     expect(hero.gold).to eq 15
   end
 
     it 'gains exp' do
     hero.gain_exp(10)
     hero.gain_exp(5)
+
     expect(hero.exp).to eq 15
   end
 
@@ -42,6 +45,7 @@ describe Hero do
 
     expect(hero.strength).to eq 5
   end
+
   it 'can be initialized with custom health' do
     hero = Hero.new health: 8
 
@@ -57,7 +61,9 @@ describe Hero do
     end
     it 'activates attack action' do
       monster = double('monster')
+
       expect(attack_action).to receive(:activate)
+
       hero.activate_action :attack, monster
     end
   end

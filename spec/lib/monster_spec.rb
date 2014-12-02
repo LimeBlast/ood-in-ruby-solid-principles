@@ -26,6 +26,7 @@ describe Monster do
 
   it 'can be killed' do
     monster.kill
+
     expect(monster.dead?).to be true
   end
 end
