@@ -15,11 +15,28 @@ describe FleeAction do
   let(:action) { FleeAction.new hero, dicepool }
 
   describe 'effect' do
+    context 'success' do
+      it 'sends flee message to the owner' do
+        allow(dicepool).to receive(:skill_check).and_return(true)
+        expect(hero).to receive(:flee)
+
+        action.activate(monster)
+      end
+    end
+    context 'failure' do
+      it 'deals damage to the owner' do
+        allow(dicepool).to receive(:skill_check).and_return(false)
+        expect(hero).to receive(:damage).with(monster.damage)
+
+        action.activate(monster)
+      end
+    end
   end
 
   describe 'activate' do
     it 'makes stealth check against target notice' do
       expect(dicepool).to receive(:skill_check).with(hero.stealth, monster.notice)
+
       action.activate(monster)
     end
   end
