@@ -2,9 +2,16 @@ require 'spec_helper'
 require_relative '../../lib/attack_action'
 
 describe AttackAction do
-  let(:hero) { double('hero', strength: 3, gain_exp: nil, gain_gold: nil, damage: nil) }
+  let(:hero) { double('hero',
+                      strength:  3,
+                      gain_exp:  nil,
+                      gain_gold: nil,
+                      damage:    nil) }
   let(:dicepool) { double('dicepool') }
-  let(:monster) { double('monster', toughness: 2, kill: nil, damage: 4) }
+  let(:monster) { double('monster',
+                         toughness: 2,
+                         kill:      nil,
+                         damage:    4) }
   let(:action) { AttackAction.new hero, dicepool }
 
   describe 'effect' do
