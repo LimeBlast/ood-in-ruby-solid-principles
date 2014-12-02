@@ -2,10 +2,8 @@ require 'spec_helper'
 require_relative '../../lib/hero'
 
 describe Hero do
-  let(:dicepool) { double('dicepool') }
-
   describe 'default attributes' do
-    let(:hero) { Hero.new dicepool: dicepool }
+    let(:hero) { Hero.new }
 
     it 'has default strength equal to 3' do
       expect(hero.strength).to eq(3)
@@ -16,30 +14,27 @@ describe Hero do
   end
 
   it 'can be initialized with custom strength' do
-    hero = Hero.new strength: 5, dicepool: dicepool
+    hero = Hero.new strength: 5
 
     expect(hero.strength).to eq 5
   end
   it 'can be initialized with custom health' do
-    hero = Hero.new health: 8, dicepool: dicepool
+    hero = Hero.new health: 8
 
     expect(hero.health).to eq 8
   end
 
   describe 'attack action' do
-    let(:monster) { double('monster', toughness: 2) }
+    let(:attack_action) { double('attack_action') }
+    let(:hero) { Hero.new actions: { attack: attack_action } }
 
-    it 'succeeds' do
-      allow(dicepool).to receive(:skill_check).and_return(true)
-      hero = Hero.new dicepool: dicepool
-
-      expect(hero.attack(monster)).to be true
+    it 'has attack action' do
+      expect(hero.actions[:attack]).to eq(attack_action)
     end
-    it 'fails' do
-      allow(dicepool).to receive(:skill_check).and_return(false)
-      hero = Hero.new dicepool: dicepool
-
-      expect(hero.attack(monster)).to be false
+    it 'activates attack action' do
+      monster = double('monster')
+      expect(attack_action).to receive(:activate)
+      hero.activate_action :attack, monster
     end
   end
 end
