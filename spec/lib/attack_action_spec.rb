@@ -11,7 +11,9 @@ describe AttackAction do
   let(:monster) { double('monster',
                          toughness: 2,
                          kill:      nil,
-                         damage:    4) }
+                         damage:    4,
+                         exp:       10,
+                         gold:      20) }
   let(:action) { AttackAction.new hero }
 
   it_behaves_like 'actionable'
