@@ -14,6 +14,8 @@ describe AttackAction do
                          damage:    4) }
   let(:action) { AttackAction.new hero, dicepool }
 
+  it_behaves_like 'action'
+
   describe 'effect' do
     context 'success' do
       before :each do

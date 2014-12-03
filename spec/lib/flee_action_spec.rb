@@ -14,6 +14,8 @@ describe FleeAction do
                          notice: 2) }
   let(:action) { FleeAction.new hero, dicepool }
 
+  it_behaves_like 'action'
+
   describe 'effect' do
     context 'success' do
       it 'sends flee message to the owner' do
