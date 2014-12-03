@@ -1,6 +1,7 @@
 require_relative 'action'
 
-class AttackAction < Action
+class AttackAction
+  include Actionable
   def action_attributes
     @attribute  = :strength
     @difficulty = :toughness

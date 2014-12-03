@@ -12,10 +12,10 @@ describe FleeAction do
                          kill:   nil,
                          damage: 4,
                          notice: 2) }
-  let(:action) { FleeAction.new hero, dicepool }
+  let(:action) { FleeAction.new hero }
 
+  it_behaves_like 'actionable'
   it_behaves_like 'action'
-  it_behaves_like 'subaction'
 
   it 'has stealth attribute' do
     expect(action.attribute).to eq :stealth
@@ -26,6 +26,10 @@ describe FleeAction do
   end
 
   describe 'effect' do
+    before :each do
+      allow(Dicepool).to receive(:new).and_return(dicepool)
+    end
+
     context 'success' do
       it 'sends flee message to the owner' do
         allow(dicepool).to receive(:skill_check).and_return(true)

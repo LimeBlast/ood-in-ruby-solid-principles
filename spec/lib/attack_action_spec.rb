@@ -12,10 +12,10 @@ describe AttackAction do
                          toughness: 2,
                          kill:      nil,
                          damage:    4) }
-  let(:action) { AttackAction.new hero, dicepool }
+  let(:action) { AttackAction.new hero }
 
+  it_behaves_like 'actionable'
   it_behaves_like 'action'
-  it_behaves_like 'subaction'
 
   it 'has strength attribute' do
     expect(action.attribute).to eq :strength
@@ -26,6 +26,10 @@ describe AttackAction do
   end
 
   describe 'effect' do
+    before :each do
+      allow(Dicepool).to receive(:new).and_return(dicepool)
+    end
+
     context 'success' do
       before :each do
         allow(dicepool).to receive(:skill_check).and_return(true)
@@ -56,9 +60,5 @@ describe AttackAction do
         action.activate(monster)
       end
     end
-  end
-
-  it 'has an owner' do
-    expect(action.owner).to eq hero
   end
 end

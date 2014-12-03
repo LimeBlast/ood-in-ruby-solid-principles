@@ -1,14 +1,16 @@
 require 'spec_helper'
 require_relative '../../lib/action'
 
-class TestAction < Action
+class TestAction
+  include Actionable
+
   def action_attributes
     @attribute  = :strength
     @difficulty = :toughness
   end
 end
 
-describe Action do
+describe Actionable do
   let(:hero) { double('hero',
                       strength:  3,
                       gain_exp:  nil,
@@ -19,15 +21,20 @@ describe Action do
                          toughness: 2,
                          kill:      nil,
                          damage:    4) }
-  let(:action) { TestAction.new hero, dicepool }
+  let(:action) { TestAction.new hero }
 
+  it_behaves_like 'actionable'
   it_behaves_like 'action'
 
   it 'requires action attributes to be implemented' do
-    expect { Action.new hero, dicepool }.to raise_exception
+    expect { Action.new hero }.to raise_exception
   end
 
   describe 'activate' do
+    before :each do
+      allow(Dicepool).to receive(:new).and_return(dicepool)
+    end
+
     it 'sends success message if skill check is successful' do
       allow(dicepool).to receive(:skill_check).and_return(true)
       expect(action).to receive(:success)
