@@ -15,6 +15,7 @@ describe AttackAction do
   let(:action) { AttackAction.new hero, dicepool }
 
   it_behaves_like 'action'
+  it_behaves_like 'subaction'
 
   it 'has strength attribute' do
     expect(action.attribute).to eq :strength
