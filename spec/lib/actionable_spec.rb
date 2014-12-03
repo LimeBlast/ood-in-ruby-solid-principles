@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../lib/action'
+require_relative '../../lib/actionable'
 
 class TestAction
   include Actionable

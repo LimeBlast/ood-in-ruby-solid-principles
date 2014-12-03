@@ -1,4 +1,4 @@
-require_relative 'action'
+require_relative 'actionable'
 
 class AttackAction
   include Actionable
